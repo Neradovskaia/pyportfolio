@@ -8,3 +8,4 @@ The classical board game for 2 players. The aime of the game is to put three X o
 |              |     |-cross_image.png
 |              |     |-zero_image.png
 |              |-game.py
+|              |
