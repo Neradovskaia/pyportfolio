@@ -43,12 +43,7 @@ class NewGame:
             return False
 
     def game_over(self):
-        win_coord = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (1, 5, 9), (3, 5, 7), (1, 4, 7), (2, 5, 8), (3, 6, 9))
-        for each in win_coord:
-            if self.board[str(each[0])] == self.board[str(each[1])] == self.board[str(each[2])]:
-                print('3 in line!')
-                return True
-        if self.tie():
+        if self.win() or self.tie():
             return True
         return False
 
@@ -61,6 +56,13 @@ class NewGame:
             return True
         return False
 
+    def win(self):
+        win_coord = ((1, 2, 3), (4, 5, 6), (7, 8, 9), (1, 5, 9), (3, 5, 7), (1, 4, 7), (2, 5, 8), (3, 6, 9))
+        for each in win_coord:
+            if self.board[str(each[0])] == self.board[str(each[1])] == self.board[str(each[2])]:
+                print('3 in line!')
+                return True
+        return False
 
 class App:
     def __init__(self):
@@ -125,7 +127,14 @@ class App:
 
     def on_game_end(self):
         self.disable_btns()
-        if self.game.tie():
+        if self.game.tie() and self.game.win():
+            if messagebox.askyesno(title='Game over',
+                                   message=f'Congratulations! {self.game.player} won! Play again?',
+                                   parent=self.app):
+                self.reset_game()
+            else:
+                self.app.destroy()
+        elif self.game.tie():
             if messagebox.askyesno(title='Game over', message='Tie! Play again?', parent=self.app):
                 self.reset_game()
             else:
