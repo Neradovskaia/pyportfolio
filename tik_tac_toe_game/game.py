@@ -78,12 +78,13 @@ class App:
         for r in range(3):
             for c in range(3):
                 count += 1
-                btn = tk.Button(self.app,
-                                text=str(count),
-                                borderwidth=1,
-                                command=lambda count=count: self.click_btn(str(count)),
-                                image=self.img
-                                )
+                btn = tk.Button(
+                    self.app,
+                    text=str(count),
+                    borderwidth=1,
+                    command=lambda count=count: self.click_btn(str(count)),
+                    image=self.img
+                )
                 btn.grid(row=r, column=c)
                 self.buttons[str(count)] = btn
 
@@ -94,7 +95,7 @@ class App:
 
     def center(self):
         """Centers this Tk window"""
-        self.app.eval('tk::PlaceWindow %s center' % app.winfo_pathname(app.winfo_id()))
+        self.app.eval('tk::PlaceWindow %s center' %self.app.winfo_pathname(self.app.winfo_id()))
 
     def make_topmost(self):
         """Makes this window the topmost window"""
@@ -115,10 +116,10 @@ class App:
     def update_btns(self, count):
         btn = self.buttons[count]
         if self.game.player == 'X':
-            filename = 'cross_image.png'
+            filename = 'cross.png'
         else:
-            filename = 'zero_image.png'
-        imgs_folder = Path('imgs')
+            filename = 'zero.png'
+        imgs_folder = Path('tik_tac_toe_game/imgs')
         file_to_open = imgs_folder / filename
         img_to_show = ImageTk.PhotoImage(Image.open(file_to_open))
         btn.configure(image=img_to_show)
@@ -128,9 +129,10 @@ class App:
     def on_game_end(self):
         self.disable_btns()
         if self.game.tie() and self.game.win():
-            if messagebox.askyesno(title='Game over',
-                                   message=f'Congratulations! {self.game.player} won! Play again?',
-                                   parent=self.app):
+            if messagebox.askyesno(
+                title='Game over',
+                message=f'Congratulations! {self.game.player} won! Play again?',
+                parent=self.app):
                 self.reset_game()
             else:
                 self.app.destroy()
@@ -140,9 +142,10 @@ class App:
             else:
                 self.app.destroy()
         else:
-            if messagebox.askyesno(title='Game over',
-                                   message=f'Congratulations! {self.game.player} won! Play again?',
-                                   parent=self.app):
+            if messagebox.askyesno(
+                title='Game over',
+                message=f'Congratulations! {self.game.player} won! Play again?',
+                parent=self.app):
                 self.reset_game()
             else:
                 self.app.destroy()

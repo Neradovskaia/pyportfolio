@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tik-tak-toe-game"
+version = "1.0.0"
+description = ""
+authors = ["Elizaveta Neradovskaia <neradovskaia.elizaveta@ya.ru>"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+pytest = "^7.2.1"
+tk = "^0.1.0"
+Pillow = "^10.1.0"
+pylint-pydantic = "^0.1.8"
+pydocstyle = "<6.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
